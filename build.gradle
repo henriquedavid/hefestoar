@@ -1,37 +1,25 @@
-apply plugin: 'com.android.application'
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-android {
-    compileSdkVersion 31
-    defaultConfig {
-        applicationId "com.google.ar.core.examples.java.helloar"
-
-        // AR Optional apps must declare minSdkVersion >= 14.
-        // AR Required apps must declare minSdkVersion >= 24.
-        minSdkVersion 24
-        targetSdkVersion 31
-        versionCode 1
-        versionName '1.0'
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
-dependencies {
-    // ARCore (Google Play Services for AR) library.
-    implementation 'com.google.ar:core:1.28.0'
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+}
 
-    // Obj - a simple Wavefront OBJ file loader
-    // https://github.com/javagl/Obj
-    implementation 'de.javagl:obj:0.2.1'
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

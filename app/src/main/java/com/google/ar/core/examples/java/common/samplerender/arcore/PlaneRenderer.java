@@ -228,7 +228,9 @@ public class PlaneRenderer {
     // they occlude the farther planes.
     List<SortablePlane> sortedPlanes = new ArrayList<>();
 
+
     for (Plane plane : allPlanes) {
+
       if (plane.getTrackingState() != TrackingState.TRACKING || plane.getSubsumedBy() != null) {
         continue;
       }
