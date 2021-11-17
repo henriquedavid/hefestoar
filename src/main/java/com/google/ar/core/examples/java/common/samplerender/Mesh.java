@@ -131,8 +131,6 @@ public class Mesh implements Closeable {
     try (InputStream inputStream = render.getAssets().open(assetFileName)) {
       Obj obj = ObjUtils.convertToRenderable(ObjReader.read(inputStream));
 
-
-
       // Obtain the data from the OBJ, as direct buffers:
       IntBuffer vertexIndices = ObjData.getFaceVertexIndices(obj, /*numVerticesPerFace=*/ 3);
       FloatBuffer localCoordinates = ObjData.getVertices(obj);
