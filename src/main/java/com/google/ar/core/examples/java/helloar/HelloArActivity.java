@@ -158,10 +158,10 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   // Virtual object (ARCore pawn)
   private ArrayList<Mesh> virtualObjectsMesh = new ArrayList<>();
   private Mesh selectedVirtualObjectMesh;
-  private enum TYPEMESH { PILAR, VIGA, CANO; }
+  private enum TYPEMESH { PILAR, VIGA, CANO }
   private TYPEMESH selectedTypeMesh = TYPEMESH.PILAR;
-  private HashMap<TYPEMESH, ArrayList<Mesh>> virtualObjsMesh = new HashMap<>();
-  private Mesh virtualObjectMesh;
+//  private HashMap<TYPEMESH, ArrayList<Mesh>> virtualObjsMesh = new HashMap<>();
+//  private Mesh virtualObjectMesh;
   private Shader virtualObjectShader;
   private final ArrayList<Anchor> anchors = new ArrayList<>();
   private final HashMap<TYPEMESH, ArrayList<Anchor>> anchorsByMesh = new HashMap<>();
@@ -194,10 +194,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     // Set up renderer.
     render = new SampleRender(surfaceView, this, getAssets());
-
-    virtualObjsMesh.put(TYPEMESH.VIGA, new ArrayList<>());
-    virtualObjsMesh.put(TYPEMESH.PILAR, new ArrayList<>());
-    virtualObjsMesh.put(TYPEMESH.CANO, new ArrayList<>());
 
     anchorsByMesh.put(TYPEMESH.VIGA, new ArrayList<Anchor>());
     anchorsByMesh.put(TYPEMESH.PILAR, new ArrayList<Anchor>());
@@ -454,10 +450,10 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
               "models/pawn_roughness_metallic_ao.png",
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.LINEAR);
-      virtualObjectMesh = Mesh.createFromAsset(render, "models/pawn.obj");
 
       virtualObjectsMesh.add(Mesh.createFromAsset(render, "models/cube.obj"));
-      virtualObjectsMesh.add(virtualObjectMesh);
+      virtualObjectsMesh.add(Mesh.createFromAsset(render, "models/pawn.obj"));
+      selectedVirtualObjectMesh = virtualObjectsMesh.get(0);
       virtualObjectShader =
           Shader.createFromAssets(
                   render,
@@ -639,7 +635,6 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       virtualObjectShader.setMat4("u_ModelViewProjection", modelViewProjectionMatrix);
 
       // Visualize just the objects with the shape selected
-
       render.draw(selectedVirtualObjectMesh, virtualObjectShader, virtualSceneFramebuffer);
     }
 
